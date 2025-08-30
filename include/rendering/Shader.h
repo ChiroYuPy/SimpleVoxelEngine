@@ -32,7 +32,7 @@ private:
     bool linkProgram(GLuint vertexShader, GLuint fragmentShader);
     int getUniformLocation(const std::string& name);
 
-    GLuint m_program = 0;
+    GLuint m_programID = 0;
     std::unordered_map<std::string, int> m_uniformCache;
 };
 

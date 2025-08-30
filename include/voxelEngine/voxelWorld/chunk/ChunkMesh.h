@@ -8,10 +8,9 @@
 #include <GLT.h>
 #include <memory>
 #include <vector>
-#include "graphics/Shader.h"
-#include "graphics/IMesh.h"
-#include "graphics/objects/VertexArray.h"
-#include "graphics/objects/Buffer.h"
+#include "rendering/Shader.h"
+#include "rendering/OpenGL/VertexArray.h"
+#include "rendering/OpenGL/Buffer.h"
 
 class World;
 class Chunk;
@@ -62,7 +61,7 @@ public:
 
 private:
     VertexArray vao;
-    Buffer instanceBuffer;
+    VertexBuffer instanceBuffer;
     size_t instanceCount = 0;
 
     void setupBuffers();

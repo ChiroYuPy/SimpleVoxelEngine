@@ -6,13 +6,12 @@
 #include <iostream>
 #include <sstream>
 
-#include "graphics/Shader.h"
+#include "rendering/Shader.h"
 #include "core/Logger.h"
 
 Shader::~Shader() {
-    if (m_program != 0) {
-        glDeleteProgram(m_program);
-    }
+    if (m_programID != 0)
+        glDeleteProgram(m_programID);
 }
 
 bool Shader::loadFromFiles(const std::string& vertexPath, const std::string& fragmentPath) {
@@ -73,8 +72,8 @@ bool Shader::compileShader(const std::string& source, GLenum type, GLuint& shade
 }
 
 void Shader::Bind() const {
-    if (m_program != 0)
-        glUseProgram(m_program);
+    if (m_programID != 0)
+        glUseProgram(m_programID);
 }
 
 void Shader::setMat4(const std::string& name, const glm::mat4& value) {
@@ -88,7 +87,7 @@ int Shader::getUniformLocation(const std::string& name) {
     if (it != m_uniformCache.end())
         return it->second;
 
-    int location = glGetUniformLocation(m_program, name.c_str());
+    int location = glGetUniformLocation(m_programID, name.c_str());
     m_uniformCache[name] = location;
     return location;
 }
@@ -122,19 +121,19 @@ void Shader::setVec4(const std::string& name, const glm::vec4& value) {
 }
 
 bool Shader::linkProgram(GLuint vertexShader, GLuint fragmentShader) {
-    m_program = glCreateProgram();
-    glAttachShader(m_program, vertexShader);
-    glAttachShader(m_program, fragmentShader);
-    glLinkProgram(m_program);
+    m_programID = glCreateProgram();
+    glAttachShader(m_programID, vertexShader);
+    glAttachShader(m_programID, fragmentShader);
+    glLinkProgram(m_programID);
 
     GLint success;
-    glGetProgramiv(m_program, GL_LINK_STATUS, &success);
+    glGetProgramiv(m_programID, GL_LINK_STATUS, &success);
     if (!success) {
         GLchar infoLog[512];
-        glGetProgramInfoLog(m_program, 512, nullptr, infoLog);
+        glGetProgramInfoLog(m_programID, 512, nullptr, infoLog);
         std::cerr << "Shader linking failed: " << infoLog << std::endl;
-        glDeleteProgram(m_program);
-        m_program = 0;
+        glDeleteProgram(m_programID);
+        m_programID = 0;
         return false;
     }
 

@@ -7,8 +7,8 @@
 
 #include <memory>
 #include <chrono>
-#include "graphics/Window.h"
-#include "graphics/Renderer.h"
+#include "rendering/Window.h"
+#include "rendering/Renderer.h"
 #include "input/InputManager.h"
 #include "scene/SceneManager.h"
 #include "Time.h"

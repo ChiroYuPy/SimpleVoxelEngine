@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "input/InputManager.h"
-#include "graphics/Camera.h"
+#include "rendering/Camera.h"
 
 class CameraController {
 public:

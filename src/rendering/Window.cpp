@@ -2,7 +2,7 @@
 // Created by ChiroYuki on 19/07/2025.
 //
 
-#include "graphics/Window.h"
+#include "rendering/Window.h"
 #include "core/Logger.h"
 
 Window::Window(unsigned int width, unsigned int height, const std::string& title)

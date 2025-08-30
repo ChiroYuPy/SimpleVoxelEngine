@@ -5,8 +5,8 @@
 #ifndef PIXLENGINE_CHUNKSCENE_H
 #define PIXLENGINE_CHUNKSCENE_H
 
-#include "graphics/Camera.h"
-#include "graphics/Shader.h"
+#include "rendering/Camera.h"
+#include "rendering/Shader.h"
 #include "core/Application.h"
 #include "CameraController.h"
 #include "scene/SceneManager.h"

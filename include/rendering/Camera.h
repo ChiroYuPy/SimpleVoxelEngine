@@ -27,22 +27,18 @@ class Camera {
 public:
     Camera();
 
-    // Mouvements
     void move(CameraMovement direction, float velocity);
     void rotate(float xOffset, float yOffset);
     void setOrientation(float yaw, float pitch);
     void setPosition(const glm::vec3& position);
 
-    // Projections
     void setFOV(float fov);
     void setNearPlane(float nearPlane);
     void setFarPlane(float farPlane);
 
-    // Matrices
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
 
-    // Getters
     glm::vec3 getPosition() const;
     glm::vec3 getFront() const;
     glm::vec3 getUp() const;

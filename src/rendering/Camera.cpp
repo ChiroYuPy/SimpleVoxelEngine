@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include <cmath>
-#include "graphics/Camera.h"
+#include "rendering/Camera.h"
 #include "core/Application.h"
 
 Camera::Camera()

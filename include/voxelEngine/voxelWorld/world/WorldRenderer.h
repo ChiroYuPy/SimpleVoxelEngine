@@ -5,7 +5,7 @@
 #ifndef PIXLENGINE_WORLDRENDERER_H
 #define PIXLENGINE_WORLDRENDERER_H
 
-#include "graphics/Camera.h"
+#include "rendering/Camera.h"
 #include "voxelEngine/voxelWorld/world/TextureColorPalette.h"
 
 class World;

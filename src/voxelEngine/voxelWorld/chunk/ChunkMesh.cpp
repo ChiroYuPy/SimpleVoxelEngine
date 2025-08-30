@@ -8,7 +8,7 @@
 #include "core/Logger.h"
 
 ChunkMesh::ChunkMesh()
-: instanceBuffer(BufferType::Instance) {
+: instanceBuffer() {
     setupVertexAttribs();
     setupBuffers();
 }
@@ -33,7 +33,7 @@ void ChunkMesh::uploadInstances(const std::vector<FaceInstance>& instances) {
     static int i = 0;
     i++;
     instanceBuffer.bind();
-    instanceBuffer.uploadData(instances.data(), instances.size() * sizeof(FaceInstance), GL_DYNAMIC_DRAW);
+    instanceBuffer.setData(instances.data(), instances.size() * sizeof(FaceInstance));
     instanceCount = instances.size();
     instanceBuffer.unbind();
     Logger::info() << "instanceCount: " << instanceCount << " | i = " << i;

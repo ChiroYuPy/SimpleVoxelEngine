@@ -3,8 +3,10 @@
 //
 
 #include "core/Application.h"
-#include "graphics/Window.h"
+#include "rendering/Window.h"
 #include "core/Logger.h"
+
+#include "rendering/OpenGL/RenderAPI.h"
 
 Application& Application::get() {
     static Application instance;
@@ -62,7 +64,7 @@ void Application::initDefaultHandlers() {
     m_inputManager->setResizeCallback([this](int width, int height) {
         Logger::info() << std::format("Window resized to {}x{}", width, height);
         m_window->resize(width, height);
-        m_renderer->setViewport(0, 0, width, height);
+        RenderAPI::SetViewport(0, 0, width, height);
     });
 }
 
@@ -72,7 +74,7 @@ void Application::run() {
 
         m_window->pollEvents();
 
-        m_renderer->clear();
+        RenderAPI::Clear();
 
         update();
         render();
@@ -95,12 +97,8 @@ void Application::update() {
 void Application::render() {
     if (!m_renderer) return;
 
-    m_renderer->beginFrame();
-
     if (m_sceneManager)
         m_sceneManager->render();
-
-    m_renderer->endFrame();
 }
 
 void Application::shutdown() {

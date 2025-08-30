@@ -27,13 +27,13 @@ set(SOURCES
 
         src/core/Logger.cpp
         src/core/Application.cpp
-        src/graphics/Window.cpp
+        src/rendering/Window.cpp
         src/platform/Platform.cpp
-        src/graphics/Shader.cpp
+        src/rendering/Shader.cpp
         src/scene/SceneManager.cpp
-        src/graphics/Renderer.cpp
+        src/rendering/Renderer.cpp
         src/input/InputManager.cpp
-        src/graphics/Camera.cpp
+        src/rendering/Camera.cpp
         src/voxelEngine/ChunkScene.cpp
         src/voxelEngine/voxelWorld/world/World.cpp
         src/voxelEngine/voxelWorld/chunk/Chunk.cpp
@@ -48,11 +48,13 @@ set(SOURCES
         src/voxelEngine/voxelWorld/world/WorldGenerator.cpp
         src/voxelEngine/voxelWorld/world/VoxelRaycaster.cpp
         src/voxelEngine/voxelWorld/world/WorldInteractor.cpp
-        src/graphics/objects/Buffer.cpp
-        src/graphics/objects/VertexArray.cpp
         src/voxelEngine/voxelWorld/world/TextureColorPalette.cpp
         src/core/Time.cpp
-        src/core/Engine.cpp
+        src/rendering/OpenGL/RenderAPI.cpp
+        src/rendering/OpenGL/Buffer.cpp
+        src/rendering/OpenGL/VertexBuffer.cpp
+        src/rendering/OpenGL/IndexBuffer.cpp
+        src/rendering/OpenGL/VertexArray.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} src/main.cpp)

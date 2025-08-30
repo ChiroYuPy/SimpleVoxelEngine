@@ -7,6 +7,7 @@
 #include "voxelEngine/ChunkScene.h"
 #include "voxelEngine/voxelWorld/chunk/Chunk.h"
 #include "core/Logger.h"
+#include "rendering/OpenGL/RenderAPI.h"
 
 constexpr unsigned int RENDER_DISTANCE = 3;
 constexpr unsigned int RENDER_HEIGHT = 1;
@@ -74,8 +75,8 @@ void ChunkScene::setupInput() {
                 static int toggle = true;
                 Renderer* renderer = Application::get().getRenderer();
 
-                PolygonMode mode = toggle ? PolygonMode::Fill : PolygonMode::Wireframe;
-                renderer->setRenderPolygonMode(mode);
+                PolygonMode mode = toggle ? PolygonMode::Fill : PolygonMode::Line;
+                RenderAPI::SetPolygonMode(PolygonFace::Both, mode);
                 toggle = !toggle;
             }
         }
