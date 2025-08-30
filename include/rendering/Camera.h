@@ -28,32 +28,48 @@ public:
     Camera();
 
     void move(CameraMovement direction, float velocity);
+
     void rotate(float xOffset, float yOffset);
+
     void setOrientation(float yaw, float pitch);
-    void setPosition(const glm::vec3& position);
+
+    void setPosition(const glm::vec3 &position);
 
     void setFOV(float fov);
+
     void setNearPlane(float nearPlane);
+
     void setFarPlane(float farPlane);
 
     glm::mat4 getViewMatrix();
+
     glm::mat4 getProjectionMatrix();
 
     glm::vec3 getPosition() const;
+
     glm::vec3 getFront() const;
+
     glm::vec3 getUp() const;
+
     glm::vec3 getRight() const;
 
     float getYaw() const;
+
     float getPitch() const;
+
     float getFOV() const;
+
     float getNearPlane() const;
+
     float getFarPlane() const;
 
 private:
     void updateCameraVectors();
+
     void updateAspectRatio();
+
     void markViewDirty();
+
     void markProjDirty();
 
     glm::vec3 m_position;

@@ -4,12 +4,12 @@
 
 #include "voxelEngine/CameraController.h"
 
-CameraController::CameraController(InputManager* input, std::shared_ptr<Camera> camera)
-        : m_input(std::move(input)), m_camera(std::move(camera)) {}
+CameraController::CameraController(std::shared_ptr<Camera> camera)
+        : m_camera(std::move(camera)) {}
 
 void CameraController::setActive(bool active) {
     m_active = active;
-    m_input->setCursorMode(active ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+    // m_input->setCursorMode(active ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
 }
 
 bool CameraController::isActive() const {
@@ -20,6 +20,7 @@ void CameraController::update(float deltaTime) {
     if (!m_active) return;
 
     float speedMultiplier = 1.0f;
+    /*
     if (m_input->isKeyHeld(GLFW_KEY_LEFT_CONTROL))
         speedMultiplier = 8.0f;
 
@@ -36,4 +37,5 @@ void CameraController::update(float deltaTime) {
     glm::vec2 offset = delta * m_rotationSensitivity;
     if (glm::length(offset) > 0.001f)
         m_camera->rotate(offset.x, -offset.y);
+    */
 }

@@ -3,7 +3,7 @@
 #include "core/Application.h"
 #include "core/Logger.h"
 
-WorldRenderer::WorldRenderer(World& world, Camera& camera, Shader& shader)
+WorldRenderer::WorldRenderer(World &world, Camera &camera, Shader &shader)
         : m_world(world), m_camera(camera), m_shader(shader), m_textureColorpalette() {
     m_textureColorpalette.updateFromRegistry();
     setupRenderStates();
@@ -18,7 +18,7 @@ void WorldRenderer::setupRenderStates() {
 }
 
 void WorldRenderer::buildAll() {
-    m_world.forEachChunk([&](const ChunkCoord& coord, Chunk* chunk) {
+    m_world.forEachChunk([&](const ChunkCoord &coord, Chunk *chunk) {
         if (chunk)
             chunk->buildMesh(m_world);
     });
@@ -52,7 +52,7 @@ void WorldRenderer::renderOpaquePass() {
     glDepthMask(GL_TRUE);
     glDisable(GL_BLEND);
 
-    m_world.forEachChunk([&](const ChunkCoord& coord, Chunk* chunk) {
+    m_world.forEachChunk([&](const ChunkCoord &coord, Chunk *chunk) {
         if (chunk)
             chunk->drawOpaque(m_shader);
     });
@@ -63,7 +63,7 @@ void WorldRenderer::renderTransparentPass() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthMask(GL_FALSE);
 
-    m_world.forEachChunk([&](const ChunkCoord& coord, Chunk* chunk) {
+    m_world.forEachChunk([&](const ChunkCoord &coord, Chunk *chunk) {
         if (chunk)
             chunk->drawTransparent(m_shader);
     });

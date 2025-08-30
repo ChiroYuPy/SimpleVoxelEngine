@@ -6,7 +6,7 @@
 #define PIXLENGINE_CHUNKSCENE_H
 
 #include "rendering/Camera.h"
-#include "rendering/Shader.h"
+#include "rendering/OpenGL/Shader.h"
 #include "core/Application.h"
 #include "CameraController.h"
 #include "scene/SceneManager.h"
@@ -18,15 +18,22 @@
 class ChunkScene : public Scene {
 public:
     bool initialize() override;
+
     void update(float deltaTime) override;
+
     void render() override;
+
     void shutdown() override;
 
 private:
     void setupCamera();
+
     void setupShader();
+
     void setupWorld();
+
     void setupBlockPlacer();
+
     void setupInput();
 
     std::shared_ptr<Camera> m_camera;

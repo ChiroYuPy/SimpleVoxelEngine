@@ -12,7 +12,7 @@ namespace voxel {
         resetToDefaults();
     }
 
-    VoxelTypeRegistry& VoxelTypeRegistry::getInstance() {
+    VoxelTypeRegistry &VoxelTypeRegistry::getInstance() {
         static VoxelTypeRegistry instance;
         return instance;
     }
@@ -24,7 +24,7 @@ namespace voxel {
         return registry_[voxelID];
     }
 
-    const VoxelTypeDefinition& VoxelTypeRegistry::getDefinition(ID voxelID) const noexcept {
+    const VoxelTypeDefinition &VoxelTypeRegistry::getDefinition(ID voxelID) const noexcept {
         static const VoxelTypeDefinition fallback{"Invalid Block", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)};
 
         if (!isValidVoxelID(voxelID)) {
@@ -33,7 +33,7 @@ namespace voxel {
         return registry_[voxelID];
     }
 
-    bool VoxelTypeRegistry::registerVoxel(ID voxelID, const VoxelTypeDefinition& definition) noexcept {
+    bool VoxelTypeRegistry::registerVoxel(ID voxelID, const VoxelTypeDefinition &definition) noexcept {
         if (!isValidVoxelID(voxelID)) {
             return false;
         }
@@ -41,15 +41,15 @@ namespace voxel {
         return true;
     }
 
-    bool VoxelTypeRegistry::registerVoxel(ID voxelID, const VoxelBuilder& builder) noexcept {
+    bool VoxelTypeRegistry::registerVoxel(ID voxelID, const VoxelBuilder &builder) noexcept {
         return registerVoxel(voxelID, builder.build());
     }
 
-    bool VoxelTypeRegistry::updateDefinition(ID voxelID, const VoxelTypeDefinition& definition) noexcept {
+    bool VoxelTypeRegistry::updateDefinition(ID voxelID, const VoxelTypeDefinition &definition) noexcept {
         return registerVoxel(voxelID, definition);
     }
 
-    bool VoxelTypeRegistry::updateColor(ID voxelID, const glm::vec4& color) noexcept {
+    bool VoxelTypeRegistry::updateColor(ID voxelID, const glm::vec4 &color) noexcept {
         if (!isValidVoxelID(voxelID)) {
             return false;
         }
@@ -65,7 +65,7 @@ namespace voxel {
         return true;
     }
 
-    bool VoxelTypeRegistry::updateProperties(ID voxelID, const VoxelProperties& properties) noexcept {
+    bool VoxelTypeRegistry::updateProperties(ID voxelID, const VoxelProperties &properties) noexcept {
         if (!isValidVoxelID(voxelID)) {
             return false;
         }
@@ -108,7 +108,7 @@ namespace voxel {
 
     void VoxelTypeRegistry::resetToDefaults() noexcept {
         // Réinitialiser tous les types à "Unknown Block" par défaut
-        for (auto& def : registry_) {
+        for (auto &def: registry_) {
             def = VoxelTypeDefinition{};
         }
 
@@ -181,11 +181,11 @@ namespace voxel {
         return voxelID <= MAX_VALID_VOXEL_ID;
     }
 
-    const VoxelTypeDefinition& getVoxelDefinition(ID voxelID) noexcept {
+    const VoxelTypeDefinition &getVoxelDefinition(ID voxelID) noexcept {
         return VoxelTypeRegistry::getInstance().getDefinition(voxelID);
     }
 
-    const std::string& getDisplayName(ID voxelID) noexcept {
+    const std::string &getDisplayName(ID voxelID) noexcept {
         return getVoxelDefinition(voxelID).displayName;
     }
 
@@ -234,8 +234,8 @@ namespace voxel {
     }
 
     bool shouldRenderFace(ID currentVoxel, ID neighborVoxel) noexcept {
-        const auto& current = getVoxelDefinition(currentVoxel);
-        const auto& neighbor = getVoxelDefinition(neighborVoxel);
+        const auto &current = getVoxelDefinition(currentVoxel);
+        const auto &neighbor = getVoxelDefinition(neighborVoxel);
 
         // Ne pas rendre les faces des voxels invisibles
         if (!current.isVisible()) {
@@ -265,7 +265,7 @@ namespace voxel {
     }
 
     bool allowsFluidFlow(ID voxelID) noexcept {
-        const auto& def = getVoxelDefinition(voxelID);
+        const auto &def = getVoxelDefinition(voxelID);
         return isAir(voxelID) || !def.hasCollision();
     }
 

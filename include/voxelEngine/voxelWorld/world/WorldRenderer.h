@@ -9,18 +9,21 @@
 #include "voxelEngine/voxelWorld/world/TextureColorPalette.h"
 
 class World;
+
 class Shader;
 
 class WorldRenderer {
 public:
-    WorldRenderer(World& world, Camera& camera, Shader& shader);
+    WorldRenderer(World &world, Camera &camera, Shader &shader);
+
     void buildAll();
+
     void renderAll();
 
 private:
-    World& m_world;
-    Camera& m_camera;
-    Shader& m_shader;
+    World &m_world;
+    Camera &m_camera;
+    Shader &m_shader;
 
     TextureColorPalette m_textureColorpalette;
 

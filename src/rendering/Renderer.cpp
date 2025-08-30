@@ -3,7 +3,6 @@
 //
 
 #include "rendering/Renderer.h"
-#include "rendering/Shader.h"
 #include "core/Logger.h"
 
 #include "rendering/OpenGL/RenderAPI.h"
@@ -19,7 +18,7 @@ bool Renderer::initialize() {
     return true;
 }
 
-void Renderer::setClearColor(const glm::vec4& color) {
+void Renderer::setClearColor(const glm::vec4 &color) {
     RenderAPI::SetClearColor(color.r, color.g, color.b, color.a);
 }
 

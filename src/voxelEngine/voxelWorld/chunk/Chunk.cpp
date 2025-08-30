@@ -6,7 +6,7 @@
 #include "voxelEngine/voxelWorld/world/World.h"
 
 Chunk::Chunk(ChunkCoord coord)
-: m_position(coord) {}
+        : m_position(coord) {}
 
 bool Chunk::isInBounds(int x, int y, int z) {
     return x >= 0 && x < VoxelArray::SIZE &&
@@ -19,7 +19,7 @@ voxel::ID Chunk::get(int x, int y, int z) const {
     return m_storage.get(x, y, z);
 }
 
-voxel::ID Chunk::get(const glm::ivec3& pos) const {
+voxel::ID Chunk::get(const glm::ivec3 &pos) const {
     return get(pos.x, pos.y, pos.z);
 }
 
@@ -29,7 +29,7 @@ void Chunk::set(int x, int y, int z, voxel::ID voxel) {
     markDirty();
 }
 
-void Chunk::set(const glm::ivec3& pos, voxel::ID voxel) {
+void Chunk::set(const glm::ivec3 &pos, voxel::ID voxel) {
     set(pos.x, pos.y, pos.z, voxel);
 }
 
@@ -46,7 +46,7 @@ glm::ivec3 Chunk::getPosition() const {
     return {m_position.x, m_position.y, m_position.z};
 }
 
-void Chunk::buildMesh(const World& world) {
+void Chunk::buildMesh(const World &world) {
     if (!m_dirty) return;
 
     std::vector<FaceInstance> opaqueFaces;
@@ -83,15 +83,13 @@ void Chunk::buildMesh(const World& world) {
 
                     if (neighborVoxelID == voxel::AIR) {
                         visible = true;
-                    }
-                    else if (type == voxel::RenderMode::OPAQUE && neighborType == voxel::RenderMode::TRANSPARENT) {
+                    } else if (type == voxel::RenderMode::OPAQUE && neighborType == voxel::RenderMode::TRANSPARENT) {
                         visible = true;
-                    }
-                    else if (type == voxel::RenderMode::TRANSPARENT) {
+                    } else if (type == voxel::RenderMode::TRANSPARENT) {
                         if (neighborType == voxel::RenderMode::TRANSPARENT)
-                        if (voxelID != neighborVoxelID) {
-                            visible = true;
-                        }
+                            if (voxelID != neighborVoxelID) {
+                                visible = true;
+                            }
                     }
 
                     if (visible) {
@@ -121,12 +119,12 @@ void Chunk::buildMesh(const World& world) {
     m_dirty = false;
 }
 
-void Chunk::drawOpaque(Shader& shader) const {
-    shader.setVec3("u_ChunkPos", glm::vec3(getPosition()*VoxelArray::SIZE));
+void Chunk::drawOpaque(Shader &shader) const {
+    shader.setVec3("u_ChunkPos", glm::vec3(getPosition() * VoxelArray::SIZE));
     m_opaqueMesh.draw();
 }
 
-void Chunk::drawTransparent(Shader& shader) const {
-    shader.setVec3("u_ChunkPos", glm::vec3(getPosition()*VoxelArray::SIZE));
+void Chunk::drawTransparent(Shader &shader) const {
+    shader.setVec3("u_ChunkPos", glm::vec3(getPosition() * VoxelArray::SIZE));
     m_transparentMesh.draw();
 }

@@ -22,14 +22,14 @@ const int MOUNTAIN_HEIGHT = HEIGHT + 60;
 
 // Configuration des biomes
 const BiomeData biomeConfigs[] = {
-        {voxel::SAND, voxel::SAND, voxel::STONE, true, false, false, 0.0},    // BiomeType::OCEAN
-        {voxel::SAND, voxel::SAND, voxel::STONE, false, false, false, 0.0},   // BiomeType::BEACH
-        {voxel::GRASS, voxel::DIRT, voxel::STONE, false, true, true, 0.02},   // BiomeType::PLAINS
-        {voxel::GRASS, voxel::DIRT, voxel::STONE, false, true, true, 0.08},   // BiomeType::FOREST
-        {voxel::SAND, voxel::SAND, voxel::STONE, false, false, true, 0.001},  // BiomeType::DESERT
-        {voxel::STONE, voxel::STONE, voxel::STONE, false, false, true, 0.01}, // BiomeType::MOUNTAINS
-        {voxel::DIRT, voxel::DIRT, voxel::STONE, true, true, false, 0.03},    // BiomeType::SWAMP
-        {voxel::DIRT, voxel::DIRT, voxel::STONE, false, false, true, 0.005}   // BiomeType::TUNDRA
+        {voxel::SAND,  voxel::SAND,  voxel::STONE, true,  false, false, 0.0},    // BiomeType::OCEAN
+        {voxel::SAND,  voxel::SAND,  voxel::STONE, false, false, false, 0.0},   // BiomeType::BEACH
+        {voxel::GRASS, voxel::DIRT,  voxel::STONE, false, true,  true,  0.02},   // BiomeType::PLAINS
+        {voxel::GRASS, voxel::DIRT,  voxel::STONE, false, true,  true,  0.08},   // BiomeType::FOREST
+        {voxel::SAND,  voxel::SAND,  voxel::STONE, false, false, true,  0.001},  // BiomeType::DESERT
+        {voxel::STONE, voxel::STONE, voxel::STONE, false, false, true,  0.01}, // BiomeType::MOUNTAINS
+        {voxel::DIRT,  voxel::DIRT,  voxel::STONE, true,  true,  false, 0.03},    // BiomeType::SWAMP
+        {voxel::DIRT,  voxel::DIRT,  voxel::STONE, false, false, true,  0.005}   // BiomeType::TUNDRA
 };
 
 BiomeType NaturalTerrainGenerator::getBiome(const glm::ivec3 &worldPos, double elevation) {
@@ -57,7 +57,8 @@ BiomeType NaturalTerrainGenerator::getBiome(const glm::ivec3 &worldPos, double e
 
 double NaturalTerrainGenerator::getCaveNoise(const glm::ivec3 &worldPos) {
     double cave1 = noise.noise3_XYBeforeZ(worldPos.x * CAVE_SCALE, worldPos.y * CAVE_SCALE, worldPos.z * CAVE_SCALE);
-    double cave2 = noise.noise3_XYBeforeZ(worldPos.x * CAVE_SCALE * 1.5 + 500, worldPos.y * CAVE_SCALE * 1.5, worldPos.z * CAVE_SCALE * 1.5 + 500);
+    double cave2 = noise.noise3_XYBeforeZ(worldPos.x * CAVE_SCALE * 1.5 + 500, worldPos.y * CAVE_SCALE * 1.5,
+                                          worldPos.z * CAVE_SCALE * 1.5 + 500);
     return std::abs(cave1) + std::abs(cave2);
 }
 
@@ -152,11 +153,9 @@ voxel::ID NaturalTerrainGenerator::generateVoxel(const glm::ivec3 &worldPos) {
             if (oreType != voxel::STONE) return oreType;
         }
         return biomeData.deepBlock;
-    }
-    else if (worldPos.y < groundHeight - 2) {
+    } else if (worldPos.y < groundHeight - 2) {
         return biomeData.subSurfaceBlock;
-    }
-    else if (worldPos.y < groundHeight) {
+    } else if (worldPos.y < groundHeight) {
         return biomeData.surfaceBlock;
     }
 

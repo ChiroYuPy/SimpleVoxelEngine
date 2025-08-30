@@ -2,18 +2,19 @@
 // Created by ChiroYuki on 19/07/2025.
 //
 
-#include <random>
-#include <iostream>
 #include "voxelEngine/ChunkScene.h"
-#include "voxelEngine/voxelWorld/chunk/Chunk.h"
+
 #include "core/Logger.h"
 #include "rendering/OpenGL/RenderAPI.h"
+#include "rendering/Renderer.h"
+
+#include <iostream>
 
 constexpr unsigned int RENDER_DISTANCE = 3;
 constexpr unsigned int RENDER_HEIGHT = 1;
 
 bool ChunkScene::initialize() {
-    Renderer* renderer = Application::get().getRenderer();
+    Renderer *renderer = Application::get().getRenderer();
     renderer->setClearColor({0.529f, 0.808f, 0.922f, 1.f});
 
     setupCamera();
@@ -27,12 +28,11 @@ bool ChunkScene::initialize() {
 
 void ChunkScene::setupCamera() {
     m_camera = std::make_shared<Camera>();
-    m_camera->setPosition(World::toWorldPos({- RENDER_DISTANCE - 1, RENDER_HEIGHT, - RENDER_DISTANCE - 1}));
+    m_camera->setPosition(World::toWorldPos({-RENDER_DISTANCE - 1, RENDER_HEIGHT, -RENDER_DISTANCE - 1}));
     m_camera->setFOV(70.f);
     m_camera->setOrientation(45.f, 0.f);
 
-    auto* input = Application::get().getInputManager();
-    m_cameraController = std::make_unique<CameraController>(input, m_camera);
+    m_cameraController = std::make_unique<CameraController>(m_camera);
 }
 
 void ChunkScene::setupShader() {
@@ -47,7 +47,8 @@ void ChunkScene::setupWorld() {
     m_world = std::make_unique<World>();
     m_chunkRenderer = std::make_unique<WorldRenderer>(*m_world, *m_camera, *m_shader);
 
-    m_world->generateArea({-RENDER_DISTANCE, -RENDER_HEIGHT, -RENDER_DISTANCE}, {RENDER_DISTANCE, RENDER_HEIGHT, RENDER_DISTANCE});
+    m_world->generateArea({-RENDER_DISTANCE, -RENDER_HEIGHT, -RENDER_DISTANCE},
+                          {RENDER_DISTANCE, RENDER_HEIGHT, RENDER_DISTANCE});
     m_chunkRenderer->buildAll();
 }
 
@@ -58,8 +59,8 @@ void ChunkScene::setupBlockPlacer() {
 }
 
 void ChunkScene::setupInput() {
-    auto* input = Application::get().getInputManager();
 
+    /*
     input->setKeyCallback([this](int key, KeyState state) {
         if (key == GLFW_KEY_ESCAPE && state == KeyState::Pressed) {
             if (m_cameraController->isActive()) {
@@ -73,7 +74,7 @@ void ChunkScene::setupInput() {
         if (state == KeyState::Pressed) {
             if (key == GLFW_KEY_Z) {
                 static int toggle = true;
-                Renderer* renderer = Application::get().getRenderer();
+                Renderer *renderer = Application::get().getRenderer();
 
                 PolygonMode mode = toggle ? PolygonMode::Fill : PolygonMode::Line;
                 RenderAPI::SetPolygonMode(PolygonFace::Both, mode);
@@ -121,6 +122,7 @@ void ChunkScene::setupInput() {
             }
         }
     });
+     */
 }
 
 void ChunkScene::update(float deltaTime) {
@@ -155,8 +157,8 @@ void ChunkScene::update(float deltaTime) {
 }
 
 void ChunkScene::render() {
-    auto* renderer = Application::get().getRenderer();
-    auto* window = Application::get().getWindow();
+    auto *renderer = Application::get().getRenderer();
+    auto *window = Application::get().getWindow();
 
     if (!renderer || !window || !m_camera || !m_shader) {
         Logger::warn() << "render aborted, missing some components";

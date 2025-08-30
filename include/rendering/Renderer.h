@@ -8,19 +8,22 @@
 #include <GLT.h>
 #include <iostream>
 #include <memory>
-#include "Shader.h"
+#include "rendering/OpenGL/Shader.h"
 #include "Camera.h"
 #include "voxelEngine/voxelWorld/chunk/ChunkMesh.h"
 
 class Renderer {
 public:
     Renderer() = default;
+
     ~Renderer() = default;
 
     bool initialize();
 
     void setViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
-    void setClearColor(const glm::vec4& color);
+
+    void setClearColor(const glm::vec4 &color);
+
     void clear();
 };
 

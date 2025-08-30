@@ -34,15 +34,20 @@ private:
     OS2 noise;
 
     BiomeType getBiome(const glm::ivec3 &worldPos, double elevation);
+
     double getCaveNoise(const glm::ivec3 &worldPos);
+
     voxel::ID getOreType(const glm::ivec3 &worldPos, double depth);
+
     bool shouldGenerateTree(const glm::ivec3 &worldPos, const BiomeData &biome);
+
     void generateTree(Chunk &voxelChunk, const glm::ivec3 &localPos, const glm::ivec3 &chunkPos);
 
 public:
     explicit NaturalTerrainGenerator(uint32_t seed) : ITerrainGenerator(seed) {}
 
     voxel::ID generateVoxel(const glm::ivec3 &worldPos) override;
+
     void generateChunk(Chunk &voxelChunk) override;
 };
 

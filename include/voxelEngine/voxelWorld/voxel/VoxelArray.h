@@ -18,6 +18,7 @@ public:
     VoxelArray();
 
     voxel::ID get(int x, int y, int z) const;
+
     void set(int x, int y, int z, voxel::ID voxel);
 
     void fill(voxel::ID ID);

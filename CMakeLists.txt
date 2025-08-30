@@ -27,12 +27,11 @@ set(SOURCES
 
         src/core/Logger.cpp
         src/core/Application.cpp
-        src/rendering/Window.cpp
+        src/core/Window.cpp
         src/platform/Platform.cpp
-        src/rendering/Shader.cpp
+        src/rendering/OpenGL/Shader.cpp
         src/scene/SceneManager.cpp
         src/rendering/Renderer.cpp
-        src/input/InputManager.cpp
         src/rendering/Camera.cpp
         src/voxelEngine/ChunkScene.cpp
         src/voxelEngine/voxelWorld/world/World.cpp
@@ -51,10 +50,16 @@ set(SOURCES
         src/voxelEngine/voxelWorld/world/TextureColorPalette.cpp
         src/core/Time.cpp
         src/rendering/OpenGL/RenderAPI.cpp
-        src/rendering/OpenGL/Buffer.cpp
-        src/rendering/OpenGL/VertexBuffer.cpp
-        src/rendering/OpenGL/IndexBuffer.cpp
+        src/rendering/OpenGL/buffer/Buffer.cpp
+        src/rendering/OpenGL/buffer/VertexBuffer.cpp
+        src/rendering/OpenGL/buffer/IndexBuffer.cpp
         src/rendering/OpenGL/VertexArray.cpp
+        src/rendering/OpenGL/texture/Texture.cpp
+        src/rendering/OpenGL/texture/Texture2D.cpp
+        src/rendering/OpenGL/texture/TextureCubeMap.cpp
+        src/rendering/OpenGL/texture/TextureLayered.cpp
+        src/rendering/OpenGL/texture/Texture2DArray.cpp
+        src/rendering/GraphicsContext.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} src/main.cpp)

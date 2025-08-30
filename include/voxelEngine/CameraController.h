@@ -5,21 +5,21 @@
 #ifndef PIXLENGINE_CAMERACONTROLLER_H
 #define PIXLENGINE_CAMERACONTROLLER_H
 
-#include <memory>
-#include "input/InputManager.h"
 #include "rendering/Camera.h"
+
+#include <memory>
 
 class CameraController {
 public:
-    CameraController(InputManager* input, std::shared_ptr<Camera> camera);
+    CameraController(std::shared_ptr<Camera> camera);
 
     void setActive(bool active);
+
     bool isActive() const;
 
     void update(float deltaTime);
 
 private:
-    InputManager* m_input;
     std::shared_ptr<Camera> m_camera;
 
     bool m_active = false;

@@ -5,7 +5,7 @@
 #ifndef VOXELENGINE_BUFFER_H
 #define VOXELENGINE_BUFFER_H
 
-#include <glad/glad.h>
+#include "glad/glad.h"
 
 #include <vector>
 
@@ -33,13 +33,13 @@ public:
         glBindBuffer(m_target, 0);
     }
 
-    void setData(const void* data, size_t size) const {
+    void setData(const void *data, size_t size) const {
         bind();
         glBufferData(m_target, static_cast<GLsizeiptr>(size), data, m_usage);
     }
 
     template<typename T>
-    void setData(const std::vector<T>& data) {
+    void setData(const std::vector<T> &data) {
         setData(data.data(), data.size() * sizeof(T));
     }
 

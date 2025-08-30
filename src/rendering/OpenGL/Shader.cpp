@@ -6,7 +6,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "rendering/Shader.h"
+#include "rendering/OpenGL/Shader.h"
 #include "core/Logger.h"
 
 Shader::~Shader() {
@@ -14,7 +14,7 @@ Shader::~Shader() {
         glDeleteProgram(m_programID);
 }
 
-bool Shader::loadFromFiles(const std::string& vertexPath, const std::string& fragmentPath) {
+bool Shader::loadFromFiles(const std::string &vertexPath, const std::string &fragmentPath) {
     std::ifstream vShaderFile(vertexPath);
     std::ifstream fShaderFile(fragmentPath);
 
@@ -30,7 +30,7 @@ bool Shader::loadFromFiles(const std::string& vertexPath, const std::string& fra
     return loadFromStrings(vShaderStream.str(), fShaderStream.str());
 }
 
-bool Shader::loadFromStrings(const std::string& vertexSource, const std::string& fragmentSource) {
+bool Shader::loadFromStrings(const std::string &vertexSource, const std::string &fragmentSource) {
     GLuint vertexShader, fragmentShader;
 
     if (!compileShader(vertexSource, GL_VERTEX_SHADER, vertexShader))
@@ -53,9 +53,9 @@ bool Shader::loadFromStrings(const std::string& vertexSource, const std::string&
     return true;
 }
 
-bool Shader::compileShader(const std::string& source, GLenum type, GLuint& shader) {
+bool Shader::compileShader(const std::string &source, GLenum type, GLuint &shader) {
     shader = glCreateShader(type);
-    const char* src = source.c_str();
+    const char *src = source.c_str();
     glShaderSource(shader, 1, &src, nullptr);
     glCompileShader(shader);
 
@@ -76,13 +76,13 @@ void Shader::Bind() const {
         glUseProgram(m_programID);
 }
 
-void Shader::setMat4(const std::string& name, const glm::mat4& value) {
+void Shader::setMat4(const std::string &name, const glm::mat4 &value) {
     int location = getUniformLocation(name);
     if (location >= 0)
         glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 }
 
-int Shader::getUniformLocation(const std::string& name) {
+int Shader::getUniformLocation(const std::string &name) {
     auto it = m_uniformCache.find(name);
     if (it != m_uniformCache.end())
         return it->second;
@@ -96,25 +96,25 @@ void Shader::Unbind() const {
     glUseProgram(0);
 }
 
-void Shader::setInt(const std::string& name, int value) {
+void Shader::setInt(const std::string &name, int value) {
     int location = getUniformLocation(name);
     if (location >= 0)
         glUniform1i(location, value);
 }
 
-void Shader::setFloat(const std::string& name, float value) {
+void Shader::setFloat(const std::string &name, float value) {
     int location = getUniformLocation(name);
     if (location >= 0)
         glUniform1f(location, value);
 }
 
-void Shader::setVec3(const std::string& name, const glm::vec3& value) {
+void Shader::setVec3(const std::string &name, const glm::vec3 &value) {
     int location = getUniformLocation(name);
     if (location >= 0)
         glUniform3fv(location, 1, &value[0]);
 }
 
-void Shader::setVec4(const std::string& name, const glm::vec4& value) {
+void Shader::setVec4(const std::string &name, const glm::vec4 &value) {
     int location = getUniformLocation(name);
     if (location >= 0)
         glUniform4fv(location, 1, &value[0]);

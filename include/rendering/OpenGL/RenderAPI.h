@@ -61,31 +61,42 @@ class RenderAPI {
 public:
     // Framebuffer / Viewport State
     static void SetClearColor(float r, float g, float b, float a = 1.0f);
+
     static void Clear(bool color = true, bool depth = true);
+
     static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
 
     // Depth / Face Culling State
     static void EnableDepthTest(bool enable = true);
+
     static void SetDepthFunc(DepthFunc func);
 
     static void EnableFaceCulling(bool enable = true);
+
     static void SetCullFace(CullFace face);
 
     static void SetPolygonMode(PolygonFace face, PolygonMode mode);
 
     // Blending State
     static void EnableBlending(bool enable = true);
+
     static void SetBlendFunc(BlendFactor src, BlendFactor dst);
 
     // Draw Commands
     static void DrawArrays(DrawMode mode, uint32_t first, uint32_t count);
-    static void DrawElements(DrawMode mode, uint32_t count, uint32_t type, const void* indices);
+
+    static void DrawElements(DrawMode mode, uint32_t count, uint32_t type, const void *indices);
+
     static void DrawArraysInstanced(DrawMode mode, uint32_t first, uint32_t count, uint32_t instanceCount);
-    static void DrawElementsInstanced(DrawMode mode, uint32_t count, uint32_t type, const void* indices, uint32_t instanceCount);
+
+    static void
+    DrawElementsInstanced(DrawMode mode, uint32_t count, uint32_t type, const void *indices, uint32_t instanceCount);
 
     // System / GPU Info
-    static const char* GetRenderer();
-    static const char* GetVersion();
+    static const char *GetRenderer();
+
+    static const char *GetVersion();
+
     static int GetMaxTextureUnits();
 };
 

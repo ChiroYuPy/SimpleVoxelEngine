@@ -24,7 +24,8 @@ namespace DirectionUtils {
     bool isValid(CubicDirection direction);
 
     CubicDirection fromOffset(int x, int y, int z);
-    CubicDirection fromOffset(const glm::ivec3& offset);
+
+    CubicDirection fromOffset(const glm::ivec3 &offset);
 
     CubicDirection fromIndex(int index);
 }

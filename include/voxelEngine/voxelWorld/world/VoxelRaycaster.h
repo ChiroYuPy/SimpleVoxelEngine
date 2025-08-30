@@ -19,30 +19,31 @@ struct RaycastHit {
 
 class VoxelRaycaster {
 public:
-    explicit VoxelRaycaster(World& world);
+    explicit VoxelRaycaster(World &world);
 
     // Effectue un raycast depuis une position dans une direction
-    [[nodiscard]] std::optional<RaycastHit> raycast(const glm::vec3& origin, const glm::vec3& direction) const;
+    [[nodiscard]] std::optional<RaycastHit> raycast(const glm::vec3 &origin, const glm::vec3 &direction) const;
 
     // Raycast depuis la caméra
-    [[nodiscard]] std::optional<RaycastHit> raycastFromCamera(const glm::vec3& cameraPos,
-                                                const glm::vec3& cameraDirection) const;
+    [[nodiscard]] std::optional<RaycastHit> raycastFromCamera(const glm::vec3 &cameraPos,
+                                                              const glm::vec3 &cameraDirection) const;
 
     void setMaxDistance(float distance) { m_maxDistance = distance; }
+
     [[nodiscard]] float getMaxDistance() const { return m_maxDistance; }
 
 private:
-    World& m_world;
+    World &m_world;
     float m_maxDistance;
 
     // Algorithme DDA (Digital Differential Analyzer) pour traverser la grille voxel
-    [[nodiscard]] std::optional<RaycastHit> performDDA(const glm::vec3& origin, const glm::vec3& direction) const;
+    [[nodiscard]] std::optional<RaycastHit> performDDA(const glm::vec3 &origin, const glm::vec3 &direction) const;
 
     // Vérifie si un bloc existe à la position donnée
-    [[nodiscard]] bool isBlockSolid(const glm::ivec3& pos) const;
+    [[nodiscard]] bool isBlockSolid(const glm::ivec3 &pos) const;
 
     // Calcule la normale de la face touchée
-    static glm::ivec3 calculateFaceNormal(const glm::ivec3& blockPos, const glm::ivec3& previousPos);
+    static glm::ivec3 calculateFaceNormal(const glm::ivec3 &blockPos, const glm::ivec3 &previousPos);
 };
 
 #endif //PIXLENGINE_VOXELRAYCASTER_H

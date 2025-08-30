@@ -11,14 +11,15 @@
 class ITerrainGenerator {
 public:
     explicit ITerrainGenerator(uint32_t seed) : m_seed(seed) {}
+
     virtual ~ITerrainGenerator() = default;
 
-    virtual void generateChunk(Chunk& voxelChunk) = 0;
+    virtual void generateChunk(Chunk &voxelChunk) = 0;
 
 protected:
     uint32_t m_seed;
 
-    virtual voxel::ID generateVoxel(const glm::ivec3& worldPos) = 0;
+    virtual voxel::ID generateVoxel(const glm::ivec3 &worldPos) = 0;
 };
 
 #endif //PIXLENGINE_ITERRAINGENERATOR_H

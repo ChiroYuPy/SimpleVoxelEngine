@@ -23,16 +23,23 @@ enum class LogLevel {
 class Logger {
 public:
     static void setLevel(LogLevel level);
+
     static LogLevel getLevel();
 
     class LogStream;
 
     static LogStream trace();
+
     static LogStream debug();
+
     static LogStream info();
+
     static LogStream success();
+
     static LogStream warn();
+
     static LogStream error();
+
     static LogStream fatal();
 
 private:
@@ -42,7 +49,9 @@ private:
     static std::mutex mtx;
 
     static void log(LogLevel level, const std::string &message);
+
     static std::string getColor(LogLevel level);
+
     static std::string getHeader(LogLevel level);
 };
 
@@ -55,11 +64,12 @@ public:
         Logger::log(level, ss.str());
     }
 
-    template <typename T>
-    LogStream& operator<<(const T& val) {
+    template<typename T>
+    LogStream &operator<<(const T &val) {
         ss << val;
         return *this;
     }
+
 private:
     LogLevel level;
     std::ostringstream ss;

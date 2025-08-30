@@ -6,7 +6,9 @@
 #include <iostream>
 
 #ifdef _WIN32
-    #include <windows.h>
+
+#include <windows.h>
+
 #endif
 
 namespace Platform {
@@ -29,11 +31,11 @@ namespace Platform {
         return "Windows";
 #elif defined(__APPLE__) || defined(__MACH__)
         return "macOS";
-    #elif defined(__linux__)
+#elif defined(__linux__)
         return "Linux";
-    #elif defined(__unix__)
+#elif defined(__unix__)
         return "Unix";
-    #else
+#else
         return "Unknown";
 #endif
     }

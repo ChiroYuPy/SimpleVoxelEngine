@@ -8,7 +8,7 @@
 #include "core/Logger.h"
 
 ChunkMesh::ChunkMesh()
-: instanceBuffer() {
+        : instanceBuffer() {
     setupVertexAttribs();
     setupBuffers();
 }
@@ -22,14 +22,14 @@ void ChunkMesh::setupVertexAttribs() {
 
     instanceBuffer.bind();
     glEnableVertexAttribArray(0);
-    glVertexAttribIPointer(0, 1, GL_UNSIGNED_INT, sizeof(FaceInstance), (void*)nullptr);
+    glVertexAttribIPointer(0, 1, GL_UNSIGNED_INT, sizeof(FaceInstance), (void *) nullptr);
     glVertexAttribDivisor(0, 1);
 
     instanceBuffer.unbind();
     vao.unbind();
 }
 
-void ChunkMesh::uploadInstances(const std::vector<FaceInstance>& instances) {
+void ChunkMesh::uploadInstances(const std::vector<FaceInstance> &instances) {
     static int i = 0;
     i++;
     instanceBuffer.bind();

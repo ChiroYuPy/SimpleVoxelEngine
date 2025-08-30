@@ -14,6 +14,7 @@ public:
     static constexpr voxel::ID MAX_COLORS = 255;
 
     TextureColorPalette();
+
     ~TextureColorPalette();
 
     void updateFromRegistry();

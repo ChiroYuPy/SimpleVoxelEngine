@@ -13,9 +13,11 @@ public:
     using TimePoint = std::chrono::time_point<Clock>;
 
     void start();
+
     void update();
 
     float getDeltaTime() const;
+
     float getElapsedTime() const;
 
 private:

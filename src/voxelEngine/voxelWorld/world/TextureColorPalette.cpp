@@ -23,7 +23,7 @@ TextureColorPalette::~TextureColorPalette() {
 void TextureColorPalette::updateFromRegistry() {
 
     for (size_t i = 0; i < MAX_COLORS; ++i) {
-        const glm::vec4& c = voxel::getVoxelColor(static_cast<voxel::ID>(i));
+        const glm::vec4 &c = voxel::getVoxelColor(static_cast<voxel::ID>(i));
         m_colors[i] = glm::vec4(c.r, c.g, c.b, c.a);
     }
 

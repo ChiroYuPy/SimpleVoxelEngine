@@ -7,7 +7,7 @@
 
 #include "Buffer.h"
 
-#include <glad/glad.h>
+#include "glad/glad.h"
 
 class IndexBuffer : public Buffer {
 private:
@@ -16,14 +16,14 @@ private:
 public:
     IndexBuffer() : Buffer(GL_ELEMENT_ARRAY_BUFFER), m_count(0) {}
 
-    IndexBuffer(const std::vector<unsigned int>& indices)
+    IndexBuffer(const std::vector<unsigned int> &indices)
             : Buffer(GL_ELEMENT_ARRAY_BUFFER), m_count(indices.size()) {
         setData(indices);
     }
 
     size_t getCount() const { return m_count; }
 
-    void setIndices(const std::vector<unsigned int>& indices) {
+    void setIndices(const std::vector<unsigned int> &indices) {
         m_count = indices.size();
         setData(indices);
     }

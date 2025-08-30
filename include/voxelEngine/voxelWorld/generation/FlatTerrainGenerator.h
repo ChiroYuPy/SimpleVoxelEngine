@@ -11,9 +11,9 @@ class FlatTerrainGenerator : public ITerrainGenerator {
 public:
     explicit FlatTerrainGenerator(uint32_t seed) : ITerrainGenerator(seed) {}
 
-    voxel::ID generateVoxel(const glm::ivec3& worldPos) override;
+    voxel::ID generateVoxel(const glm::ivec3 &worldPos) override;
 
-    void generateChunk(Chunk& voxelChunk) override;
+    void generateChunk(Chunk &voxelChunk) override;
 
 private:
     static constexpr int HEIGHT = 4;

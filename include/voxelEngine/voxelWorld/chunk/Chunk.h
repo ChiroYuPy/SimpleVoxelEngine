@@ -16,11 +16,11 @@ struct ChunkCoord {
 
     ChunkCoord(int x = 0, int y = 0, int z = 0) : x(x), y(y), z(z) {}
 
-    bool operator==(const ChunkCoord& other) const {
+    bool operator==(const ChunkCoord &other) const {
         return x == other.x && y == other.y && z == other.z;
     }
 
-    bool operator!=(const ChunkCoord& other) const {
+    bool operator!=(const ChunkCoord &other) const {
         return !(*this == other);
     }
 };
@@ -28,7 +28,7 @@ struct ChunkCoord {
 namespace std {
     template<>
     struct hash<ChunkCoord> {
-        size_t operator()(const ChunkCoord& coord) const {
+        size_t operator()(const ChunkCoord &coord) const {
             size_t h1 = hash<int>{}(coord.x);
             size_t h2 = hash<int>{}(coord.y);
             size_t h3 = hash<int>{}(coord.z);
@@ -42,10 +42,12 @@ public:
     explicit Chunk(ChunkCoord coord);
 
     voxel::ID get(int x, int y, int z) const;
-    voxel::ID get(const glm::ivec3& pos) const;
+
+    voxel::ID get(const glm::ivec3 &pos) const;
 
     void set(int x, int y, int z, voxel::ID voxel);
-    void set(const glm::ivec3& pos, voxel::ID voxel);
+
+    void set(const glm::ivec3 &pos, voxel::ID voxel);
 
     void fill(voxel::ID ID);
 
@@ -53,10 +55,11 @@ public:
 
     glm::ivec3 getPosition() const;
 
-    void buildMesh(const World& world);
+    void buildMesh(const World &world);
 
-    void drawOpaque(Shader& shader) const;
-    void drawTransparent(Shader& shader) const;
+    void drawOpaque(Shader &shader) const;
+
+    void drawTransparent(Shader &shader) const;
 
 private:
     ChunkCoord m_position;

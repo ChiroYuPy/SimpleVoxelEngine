@@ -7,14 +7,14 @@
 
 #include "Buffer.h"
 
-#include <glad/glad.h>
+#include "glad/glad.h"
 
 class VertexBuffer : public Buffer {
 public:
     VertexBuffer() : Buffer(GL_ARRAY_BUFFER) {}
 
     template<typename T>
-    VertexBuffer(const std::vector<T>& vertices) : Buffer(GL_ARRAY_BUFFER) {
+    VertexBuffer(const std::vector<T> &vertices) : Buffer(GL_ARRAY_BUFFER) {
         setData(vertices);
     }
 };

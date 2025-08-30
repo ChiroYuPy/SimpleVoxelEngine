@@ -1,6 +1,6 @@
 #version 330 core
 
-layout(location = 0) in uint iData;
+layout (location = 0) in uint iData;
 
 uniform mat4 u_ViewProjection;
 uniform vec3 u_ChunkPos;
@@ -33,17 +33,17 @@ vec4(0, -1, 0, 1)
 ),
 // +X (faceID = 2) - Droite
 mat4(
-vec4( 0, -1, 0, 0),
-vec4( 1,  0, 0, 0),
-vec4( 0,  0, 1, 0),
-vec4( 1,  0, 0, 1)
+vec4(0, -1, 0, 0),
+vec4(1, 0, 0, 0),
+vec4(0, 0, 1, 0),
+vec4(1, 0, 0, 1)
 ),
 // -X (faceID = 3) - Gauche
 mat4(
 vec4(0, 1, 0, 0),
-vec4(-1,  0, 0, 0),
-vec4(0,  0, 1, 0),
-vec4(0,  -1, 0, 1)
+vec4(-1, 0, 0, 0),
+vec4(0, 0, 1, 0),
+vec4(0, -1, 0, 1)
 ),
 // +Y (faceID = 4) - Haut
 mat4(
@@ -62,12 +62,12 @@ vec4(0, -1, 1, 1)
 );
 
 void main() {
-    uint x       = (iData >>  0u) & 31u;
-    uint y       = (iData >>  5u) & 31u;
-    uint z       = (iData >> 10u) & 31u;
-    uint faceID  = (iData >> 15u) & 7u;
+    uint x = (iData >> 0u) & 31u;
+    uint y = (iData >> 5u) & 31u;
+    uint z = (iData >> 10u) & 31u;
+    uint faceID = (iData >> 15u) & 7u;
     uint voxelID = (iData >> 18u) & 255u;
-    uint length  = (iData >> 26u) & 31u;
+    uint length = (iData >> 26u) & 31u;
 
     vec3 voxelPos = vec3(float(x), float(y), float(z));
     vec4 localPos = vec4(BASE_QUAD[gl_VertexID], 1.0);
@@ -82,6 +82,6 @@ void main() {
 
     gl_Position = u_ViewProjection * vec4(worldPos.xyz, 1.0);
 
-    v_Color   = texture(u_ColorTex, float(voxelID) / 255.0);
-    v_FaceID  = faceID;
+    v_Color = texture(u_ColorTex, float(voxelID) / 255.0);
+    v_FaceID = faceID;
 }

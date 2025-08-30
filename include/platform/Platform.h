@@ -9,6 +9,7 @@
 
 namespace Platform {
     void enableAnsiColors();
+
     std::string getPlatformName();
 }
 

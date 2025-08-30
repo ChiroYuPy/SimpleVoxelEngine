@@ -15,11 +15,15 @@ public:
     virtual ~Scene() = default;
 
     virtual bool initialize() = 0;
+
     virtual void shutdown() = 0;
+
     virtual void update(float deltaTime) = 0;
+
     virtual void render() = 0;
 
     virtual void onEnter() {}
+
     virtual void onExit() {}
 
 protected:
@@ -29,20 +33,23 @@ protected:
 class SceneManager {
 public:
     SceneManager() = default;
+
     ~SceneManager();
 
     template<typename T>
-    void registerScene(const std::string& name) {
+    void registerScene(const std::string &name) {
         m_sceneFactories[name] = []() { return std::make_unique<T>(); };
     }
 
-    bool loadScene(const std::string& name);
+    bool loadScene(const std::string &name);
+
     void unloadCurrentScene();
 
     void update(float deltaTime);
+
     void render();
 
-    Scene* getCurrentScene() const { return m_currentScene.get(); }
+    Scene *getCurrentScene() const { return m_currentScene.get(); }
 
 private:
     using SceneFactory = std::function<std::unique_ptr<Scene>()>;

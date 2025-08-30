@@ -6,21 +6,21 @@
 #include "voxelEngine/voxelWorld/world/World.h"
 #include <algorithm>
 
-VoxelRaycaster::VoxelRaycaster(World& world)
+VoxelRaycaster::VoxelRaycaster(World &world)
         : m_world(world), m_maxDistance(10.f) {
 }
 
-std::optional<RaycastHit> VoxelRaycaster::raycast(const glm::vec3& origin, const glm::vec3& direction) const {
+std::optional<RaycastHit> VoxelRaycaster::raycast(const glm::vec3 &origin, const glm::vec3 &direction) const {
     glm::vec3 normalizedDir = glm::normalize(direction);
     return performDDA(origin, normalizedDir);
 }
 
-std::optional<RaycastHit> VoxelRaycaster::raycastFromCamera(const glm::vec3& cameraPos,
-                                                            const glm::vec3& cameraDirection) const {
+std::optional<RaycastHit> VoxelRaycaster::raycastFromCamera(const glm::vec3 &cameraPos,
+                                                            const glm::vec3 &cameraDirection) const {
     return raycast(cameraPos, cameraDirection);
 }
 
-std::optional<RaycastHit> VoxelRaycaster::performDDA(const glm::vec3& origin, const glm::vec3& direction) const {
+std::optional<RaycastHit> VoxelRaycaster::performDDA(const glm::vec3 &origin, const glm::vec3 &direction) const {
     // Position actuelle du ray en coordonnées de bloc
     glm::ivec3 mapPos = glm::ivec3(glm::floor(origin));
 
@@ -131,12 +131,12 @@ std::optional<RaycastHit> VoxelRaycaster::performDDA(const glm::vec3& origin, co
     return std::nullopt;
 }
 
-bool VoxelRaycaster::isBlockSolid(const glm::ivec3& pos) const {
+bool VoxelRaycaster::isBlockSolid(const glm::ivec3 &pos) const {
     return m_world.getVoxel(pos.x, pos.y, pos.z) != 0;
 }
 
-glm::ivec3 VoxelRaycaster::calculateFaceNormal(const glm::ivec3& blockPos,
-                                               const glm::ivec3& previousPos) {
+glm::ivec3 VoxelRaycaster::calculateFaceNormal(const glm::ivec3 &blockPos,
+                                               const glm::ivec3 &previousPos) {
     glm::ivec3 diff = previousPos - blockPos;
 
     // La normale pointe vers la face d'où vient le ray

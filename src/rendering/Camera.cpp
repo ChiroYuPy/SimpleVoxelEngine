@@ -2,10 +2,12 @@
 // Created by ChiroYuki on 19/07/2025.
 //
 
+#include "rendering/Camera.h"
+#include "core/Window.h"
+#include "core/Application.h"
+
 #include <algorithm>
 #include <cmath>
-#include "rendering/Camera.h"
-#include "core/Application.h"
 
 Camera::Camera()
         : m_position(0.f, 0.f, 0.f),
@@ -14,8 +16,7 @@ Camera::Camera()
           m_pitch(0.f),
           m_fov(45.0f),
           m_nearPlane(0.1f),
-          m_farPlane(1000.0f)
-{
+          m_farPlane(1000.0f) {
     updateCameraVectors();
 }
 
@@ -46,13 +47,26 @@ glm::mat4 Camera::getProjectionMatrix() {
 
 void Camera::move(CameraMovement direction, float velocity) {
     switch (direction) {
-        case CameraMovement::Forward:  m_position += m_front * velocity; break;
-        case CameraMovement::Backward: m_position -= m_front * velocity; break;
-        case CameraMovement::Left:     m_position -= m_right * velocity; break;
-        case CameraMovement::Right:    m_position += m_right * velocity; break;
-        case CameraMovement::Up:       m_position += m_up * velocity; break;
-        case CameraMovement::Down:     m_position -= m_up * velocity; break;
-        default: break;
+        case CameraMovement::Forward:
+            m_position += m_front * velocity;
+            break;
+        case CameraMovement::Backward:
+            m_position -= m_front * velocity;
+            break;
+        case CameraMovement::Left:
+            m_position -= m_right * velocity;
+            break;
+        case CameraMovement::Right:
+            m_position += m_right * velocity;
+            break;
+        case CameraMovement::Up:
+            m_position += m_up * velocity;
+            break;
+        case CameraMovement::Down:
+            m_position -= m_up * velocity;
+            break;
+        default:
+            break;
     }
     markViewDirty();
 }
@@ -82,25 +96,30 @@ void Camera::updateCameraVectors() {
     m_front = glm::normalize(front);
 
     m_right = glm::normalize(glm::cross(m_front, m_worldUp));
-    m_up    = glm::normalize(glm::cross(m_right, m_front));
+    m_up = glm::normalize(glm::cross(m_right, m_front));
 }
 
 // ==== Getters / Setters ====
 
 glm::vec3 Camera::getPosition() const { return m_position; }
-void Camera::setPosition(const glm::vec3& position) {
+
+void Camera::setPosition(const glm::vec3 &position) {
     m_position = position;
     markViewDirty();
 }
 
 glm::vec3 Camera::getFront() const { return m_front; }
+
 glm::vec3 Camera::getUp() const { return m_up; }
+
 glm::vec3 Camera::getRight() const { return m_right; }
 
 float Camera::getYaw() const { return m_yaw; }
+
 float Camera::getPitch() const { return m_pitch; }
 
 float Camera::getFOV() const { return m_fov; }
+
 void Camera::setFOV(float fov) {
     m_fov = std::clamp(fov, MIN_FOV, MAX_FOV);
     markProjDirty();

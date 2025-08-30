@@ -9,7 +9,7 @@ SceneManager::~SceneManager() {
     unloadCurrentScene();
 }
 
-bool SceneManager::loadScene(const std::string& name) {
+bool SceneManager::loadScene(const std::string &name) {
     auto it = m_sceneFactories.find(name);
     if (it == m_sceneFactories.end()) {
         std::cerr << "Scene '" << name << "' not found" << std::endl;

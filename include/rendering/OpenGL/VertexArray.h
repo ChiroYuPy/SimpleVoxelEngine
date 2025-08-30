@@ -5,10 +5,10 @@
 #ifndef VOXELENGINE_VERTEXARRAY_H
 #define VOXELENGINE_VERTEXARRAY_H
 
-#include "Buffer.h"
+#include "rendering/OpenGL/buffer/Buffer.h"
 
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
+#include "rendering/OpenGL/buffer/VertexBuffer.h"
+#include "rendering/OpenGL/buffer/IndexBuffer.h"
 
 #include <glad/glad.h>
 #include <memory>
@@ -36,10 +36,10 @@ public:
         glBindVertexArray(0);
     }
 
-    void addVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer,
+    void addVertexBuffer(const std::shared_ptr<VertexBuffer> &buffer,
                          GLuint index, GLint size, GLenum type,
                          GLboolean normalized = GL_FALSE,
-                         GLsizei stride = 0, const void* pointer = nullptr) {
+                         GLsizei stride = 0, const void *pointer = nullptr) {
         bind();
         buffer->bind();
 
@@ -49,7 +49,7 @@ public:
         m_vertexBuffers.push_back(buffer);
     }
 
-    void setIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer) {
+    void setIndexBuffer(const std::shared_ptr<IndexBuffer> &buffer) {
         bind();
         buffer->bind();
         m_indexBuffer = buffer;
